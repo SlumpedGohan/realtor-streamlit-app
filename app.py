@@ -25,8 +25,6 @@ def get_listings():
 
     response = requests.post(url, headers=headers, json=home_data)
 
-    # print(response.json()) #.json will show actual property data requested from the API
-
     property_list = response.json()['data']['home_search']['properties'] 
 
     df = pd.DataFrame(property_list)
@@ -73,8 +71,6 @@ if st.button("Get Listings"):
     else:
         st.success("Listings successfully pulled for Las Vegas, NV")
         st.dataframe(clean_df)
-
-        # Download button
         csv = clean_df.to_csv(index=False).encode('utf-8')
         st.download_button(
             label="📥 Download CSV",
